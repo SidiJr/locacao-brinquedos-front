@@ -8,21 +8,32 @@ import Login from "./components/Login";
 import { useAuth, AuthProvider } from "./contexts/AuthContext";
 
 function App() {
-  const isAuthenticated = useAuth();
-
   return (
     <AuthProvider>
       <Router>
-        {isAuthenticated && <NavBar />}
-        <div>
-          <Routes>
-            <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </div>
+        <AuthContent />
       </Router>
     </AuthProvider>
   );
 }
 
 export default App;
+
+const AuthContent = () => {
+  const { isAuthenticated } = useAuth();
+
+  console.log(isAuthenticated);
+
+  return (
+    <div>
+      {isAuthenticated && <NavBar />}
+      <div>
+        <Routes>
+          <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+          <Route path="/about" element={<About />} />
+        </Routes>
+      </div>
+    </div>
+  );
+};
+
