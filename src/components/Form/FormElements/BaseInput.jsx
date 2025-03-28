@@ -1,20 +1,20 @@
-import React from 'react'
+import React from 'react';
 
-const Input = ({ label, label, type, name, value, onChange, required }) => {
+const Input = ({ label, type, name, value, onChange, required }) => {
     return (
         <div>
-            <label>{label}</label>
+            <label htmlFor={name}>{label}</label>
             <input
                 className="border border-neutral-300 rounded-md"
                 type={type}
-                id={name}
                 name={name}
+                id={name}
                 value={value}
                 onChange={onChange}
                 required={required}
             />
         </div>
-    )
-}
+    );
+};
 
-export default Input
+export default Input;

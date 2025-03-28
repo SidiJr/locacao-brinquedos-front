@@ -22,8 +22,6 @@ export default App;
 const AuthContent = () => {
   const { isAuthenticated } = useAuth();
 
-  console.log(isAuthenticated);
-
   return (
     <div>
       {isAuthenticated && <NavBar />}
