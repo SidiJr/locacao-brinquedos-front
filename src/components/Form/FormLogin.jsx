@@ -23,9 +23,8 @@ const FormLogin = () => {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
-            <Form fields={fields} onSubmit={handleSubmit} />
+        <div className="w-full px-50">
+            <Form fields={fields} onSubmit={handleSubmit} formClass={"gap-4"} labelClass={"underline"} buttonText={"Entrar"} />
         </div>
     );
 };

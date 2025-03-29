@@ -1,9 +1,10 @@
 import React, { useState, useCallback } from 'react';
 import Input from './BaseInput';
 import BaseButton from './BaseButton';
+import clsx from 'clsx';
 
 // Necessário passar um array de objetos com os fields e a função de submit
-const Form = ({ fields, onSubmit }) => {
+const Form = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonText }) => {
     const [formData, setFormData] = useState({});
 
     // Função para atualizar os dados do formulário com base nos inputs
@@ -23,20 +24,22 @@ const Form = ({ fields, onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={clsx("flex flex-col", formClass)}>
             {fields.map((field) => (
-                <div key={field.name}>
-                    {field.label && <label htmlFor={field.name}>{field.label}</label>}
+                <div key={field.name} >
                     <Input
                         name={field.name}
                         type={field.type}
                         value={formData[field.name] || ''}
                         onChange={handleChange}
                         required={field.required}
+                        labelClass={labelClass}
+                        inputClass={inputClass}
+                        label={field.label}
                     />
                 </div>
             ))}
-            <BaseButton isForm text={"Entrar"}/>
+            <BaseButton isForm text={buttonText} />
         </form>
     );
 };
