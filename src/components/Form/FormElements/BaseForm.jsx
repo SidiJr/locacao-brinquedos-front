@@ -6,7 +6,7 @@ import { useForm } from '../../../contexts/FormContext';
 import BaseSearchField from './BaseList';
 
 // Necessário passar um array de objetos com os fields e a função de submit
-const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonText, title, showList, hideTotalizador }) => {
+const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonText, title, showList, hideTotalizador, hideFixedButtons, hideCancelar }) => {
 
     const { formData, updateFormData } = useForm();
 
@@ -51,13 +51,13 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
                 </div>)}
 
                 {/* Totalizador e botões */}
-                {!hideTotalizador && (<div className={clsx("flex border bg-white p-10 gap-4 rounded-md w-3/4 items-center justify-between fixed bottom-0")}>
-                    <div>Aqui vai ter o totalizador</div>
-                    <div>
-                        <BaseButton text={"Cancelar"}/>
-                        <BaseButton isForm text={"Salvar"} />
+                {!hideFixedButtons && <div className={clsx("flex border bg-white p-2 rounded-md w-full items-center justify-between fixed bottom-0")}>
+                    {!hideTotalizador && <div className="border bg-white rounded-md p-6" >Aqui vai ter o totalizador</div>}
+                    <div className='flex gap-2'>
+                        {!hideCancelar && <BaseButton text={"Cancelar"} />}
+                        <BaseButton isForm text={buttonText ?? "Salvar"} />
                     </div>
-                </div>)}
+                </div>}
 
             </form>
         </section>

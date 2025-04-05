@@ -1,3 +1,4 @@
+import { FormProvider } from "../../contexts/FormContext";
 import Form from "./FormElements/BaseForm";
 
 const FormLogin = () => {
@@ -24,7 +25,9 @@ const FormLogin = () => {
 
     return (
         <div className="w-full px-50">
-            <Form fields={fields} onSubmit={handleSubmit} formClass={"gap-4"} labelClass={"underline"} buttonText={"Entrar"} />
+            <FormProvider>
+                <Form fields={fields} onSubmit={handleSubmit} buttonText={"Entrar"} hideFixedButtons/>
+            </FormProvider>
         </div>
     );
 };
