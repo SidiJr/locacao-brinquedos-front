@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import React from 'react';
 
-const Input = ({ label, type, name, value, onChange, required, inputClass, labelClass }) => {
+const BaseInput = ({ label, type, name, value, onChange, required, inputClass, labelClass }) => {
 
     return (
         <div>
-            {label && <label className={clsx("w-full", labelClass)} htmlFor={name}>{label}</label>}
+            {label && <label className={clsx("w-full underline", labelClass)} htmlFor={name}>{label}</label>}
             <input
-                className={clsx("border border-neutral-300 rounded-md w-full py-2", inputClass)}
+                className={clsx("border border-neutral-300 rounded-md w-full py-3", inputClass)}
                 type={type}
                 name={name}
                 id={name}
@@ -19,4 +19,4 @@ const Input = ({ label, type, name, value, onChange, required, inputClass, label
     );
 };
 
-export default Input;
+export default BaseInput;

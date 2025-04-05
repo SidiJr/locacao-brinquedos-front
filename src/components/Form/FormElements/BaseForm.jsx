@@ -2,46 +2,67 @@ import React, { useState, useCallback } from 'react';
 import Input from './BaseInput';
 import BaseButton from './BaseButton';
 import clsx from 'clsx';
+import { useForm } from '../../../contexts/FormContext';
+import BaseSearchField from './BaseList';
 
 // Necessário passar um array de objetos com os fields e a função de submit
-const Form = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonText }) => {
-    const [formData, setFormData] = useState({});
+const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonText, title, showList, hideTotalizador }) => {
 
-    // Função para atualizar os dados do formulário com base nos inputs
-    const handleChange = useCallback((e) => {
+    const { formData, updateFormData } = useForm();
+
+    const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData((prevState) => ({
-            ...prevState,
-            [name]: value,
-        }));
-    }, []);
-
-    // Função para o envio do formulário
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Chama a função de submit passada como prop
-        onSubmit(formData);
+        updateFormData(name, value);
     };
 
+    const handleSubmit = () => {
+        //aqui vai ser enviado os dados para o back
+    }
+
+    console.log("formData: ", formData);
+
     return (
-        <form onSubmit={handleSubmit} className={clsx("flex flex-col", formClass)}>
-            {fields.map((field) => (
-                <div key={field.name} >
-                    <Input
-                        name={field.name}
-                        type={field.type}
-                        value={formData[field.name] || ''}
-                        onChange={handleChange}
-                        required={field.required}
-                        labelClass={labelClass}
-                        inputClass={inputClass}
-                        label={field.label}
-                    />
+        //Envolve todo o componente
+
+        <section className={clsx("w-full flex flex-col items-center bg-red-100 h-screen")}>
+            <p >{title}</p>
+            <form className="w-full flex flex-col items-center" onSubmit={handleSubmit}>
+                {/* Envolve os campos */}
+                <div className={clsx("flex flex-col border bg-white p-10 gap-4 rounded-md w-3/4")}>
+                    {fields.map((field) => (
+                        // Envolve cada campo
+                        <div key={field.name} >
+                            <Input
+                                name={field.name}
+                                type={field.type}
+                                value={formData[field.name] || ''}
+                                onChange={handleChange}
+                                required={field.required}
+                                labelClass={labelClass}
+                                inputClass={inputClass}
+                                label={field.label}
+                            />
+                        </div>
+                    ))}
                 </div>
-            ))}
-            <BaseButton isForm text={buttonText} />
-        </form>
+                {/* Aqui a lista */}
+                {showList && (<div className={clsx("flex flex-col border bg-white p-10 gap-4 rounded-md w-3/4 items-center")}>
+                    <BaseSearchField />
+                </div>)}
+
+                {/* Totalizador e botões */}
+                {!hideTotalizador && (<div className={clsx("flex border bg-white p-10 gap-4 rounded-md w-3/4 items-center justify-between fixed bottom-0")}>
+                    <div>Aqui vai ter o totalizador</div>
+                    <div>
+                        <BaseButton text={"Cancelar"}/>
+                        <BaseButton isForm text={"Salvar"} />
+                    </div>
+                </div>)}
+
+            </form>
+        </section>
+
     );
 };
 
-export default Form;
+export default BaseForm;
