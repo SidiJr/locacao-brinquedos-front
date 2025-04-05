@@ -1,11 +1,12 @@
 import "./App.css";
-import React, { useContext } from "react";
 import Home from "./components/Home";
 import About from "./components/About";
 import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import { useAuth, AuthProvider } from "./contexts/AuthContext";
+import FormLocacao from "./components/Form/FormLocacao";
+import FormClientes from "./components/Form/FormClientes";
 
 function App() {
   return (
@@ -29,6 +30,10 @@ const AuthContent = () => {
         <Routes>
           <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
           <Route path="/about" element={<About />} />
+          {/* <Route path="/locacao" element={<About/>} /> */}
+          <Route path="/locacao/form" element={<FormLocacao />} />
+          {/* <Route path="/cliente" element={<About />} /> */}
+          <Route path="/cliente/form" element={<FormClientes />} />
         </Routes>
       </div>
     </div>
