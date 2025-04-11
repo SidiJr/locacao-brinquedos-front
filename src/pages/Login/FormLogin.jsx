@@ -1,5 +1,5 @@
+import BaseForm from "../../components/Form/FormElements/BaseForm";
 import { FormProvider } from "../../contexts/FormContext";
-import Form from "./FormElements/BaseForm";
 
 const FormLogin = () => {
     const fields = [
@@ -26,7 +26,7 @@ const FormLogin = () => {
     return (
         <div className="w-full px-50">
             <FormProvider>
-                <Form fields={fields} onSubmit={handleSubmit} buttonText={"Entrar"} hideFixedButtons/>
+                <BaseForm fields={fields} onSubmit={handleSubmit} buttonText={"Entrar"} hideFixedButtons/>
             </FormProvider>
         </div>
     );

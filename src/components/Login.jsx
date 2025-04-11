@@ -1,5 +1,5 @@
 import React from "react";
-import FormLogin from "./Form/FormLogin";
+import FormLogin from "../pages/Login/FormLogin";
 import UserIcon from "./Icons/UserIcon";
 
 function Login() {

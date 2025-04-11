@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React, { useState } from 'react'
 import { useForm } from '../../../contexts/FormContext';
 
@@ -34,7 +35,12 @@ const BaseSearchField = () => {
             {/* Campo de pesquisa */}
             <input
                 type="text"
-                className="border border-neutral-300 rounded-md w-full py-3"
+                className={clsx("w-full px-4 py-3 rounded-md border",
+                    "border-neutral-300 dark:border-neutral-600",
+                    "bg-white dark:bg-neutral-900",
+                    "placeholder-neutral-400 dark:placeholder-neutral-500",
+                    "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+                    "transition duration-150 ease-in-out",)}
                 placeholder="Pesquise por itens"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}

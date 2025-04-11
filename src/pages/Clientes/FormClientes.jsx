@@ -1,5 +1,5 @@
+import BaseForm from "../../components/Form/FormElements/BaseForm";
 import { FormProvider } from "../../contexts/FormContext";
-import Form from "./FormElements/BaseForm";
 
 const FormClientes = () => {
 
@@ -38,7 +38,7 @@ const FormClientes = () => {
 
     return (
         <FormProvider>
-            <Form fields={fields} title={"Cliente"} />
+            <BaseForm fields={fields} title={"Cliente"} />
         </FormProvider>
     );
 

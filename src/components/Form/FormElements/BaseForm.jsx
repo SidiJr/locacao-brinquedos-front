@@ -25,8 +25,8 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
         //Envolve todo o componente
 
         <section className={clsx("w-full flex flex-col items-center bg-red-100 h-screen")}>
-            <p >{title}</p>
-            <form className="w-full flex flex-col items-center" onSubmit={handleSubmit}>
+            <form className="w-full flex flex-col items-center gap-4 py-4" onSubmit={handleSubmit}>
+                <p >{title}</p>
                 {/* Envolve os campos */}
                 <div className={clsx("flex flex-col border bg-white p-10 gap-4 rounded-md w-3/4")}>
                     {fields.map((field) => (
@@ -41,6 +41,7 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
                                 labelClass={labelClass}
                                 inputClass={inputClass}
                                 label={field.label}
+                                placeholder={field.placeholder}
                             />
                         </div>
                     ))}

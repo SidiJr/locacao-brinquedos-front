@@ -5,8 +5,8 @@ import NavBar from "./components/NavBar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import { useAuth, AuthProvider } from "./contexts/AuthContext";
-import FormLocacao from "./components/Form/FormLocacao";
-import FormClientes from "./components/Form/FormClientes";
+import FormLocacao from "./pages/Locacoes/FormLocacoes";
+import FormClientes from "./pages/Clientes/FormClientes";
 
 function App() {
   return (

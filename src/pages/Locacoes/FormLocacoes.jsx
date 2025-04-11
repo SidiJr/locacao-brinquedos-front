@@ -1,14 +1,15 @@
+import BaseForm from "../../components/Form/FormElements/BaseForm";
 import { FormProvider } from "../../contexts/FormContext";
-import Form from "./FormElements/BaseForm";
 
 const FormLocacao = () => {
 
     const fields = [
         {
-            name: 'cliente',
+            name: 'cpf',
             type: 'text',
-            label: 'Cliente',
+            label: 'CPF',
             required: true,
+            placeholder: 'CPF do Cliente',
         },
         {
             name: 'data_atual',
@@ -26,7 +27,7 @@ const FormLocacao = () => {
 
     return (
         <FormProvider>
-            <Form fields={fields} title={"Locação"} showList />
+            <BaseForm fields={fields} title={"Locação"} showList />
         </FormProvider>
     );
 
