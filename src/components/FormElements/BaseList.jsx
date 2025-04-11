@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import React, { useState } from 'react'
-import { useForm } from '../../../contexts/FormContext';
+import { useForm } from '../../contexts/FormContext';
 
 const BaseSearchField = () => {
 

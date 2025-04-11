@@ -31,9 +31,9 @@ const AuthContent = () => {
           <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
           <Route path="/about" element={<About />} />
           {/* <Route path="/locacao" element={<About/>} /> */}
-          <Route path="/locacao/form" element={<FormLocacao />} />
+          <Route path="/locacaoes/form" element={<FormLocacao />} />
           {/* <Route path="/cliente" element={<About />} /> */}
-          <Route path="/cliente/form" element={<FormClientes />} />
+          <Route path="/clientes/form" element={<FormClientes />} />
         </Routes>
       </div>
     </div>

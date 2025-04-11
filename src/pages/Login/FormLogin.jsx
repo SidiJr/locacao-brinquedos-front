@@ -1,4 +1,4 @@
-import BaseForm from "../../components/Form/FormElements/BaseForm";
+import BaseForm from "../../components/FormElements/BaseForm";
 import { FormProvider } from "../../contexts/FormContext";
 
 const FormLogin = () => {

@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react';
 import Input from './BaseInput';
 import BaseButton from './BaseButton';
 import clsx from 'clsx';
-import { useForm } from '../../../contexts/FormContext';
+import { useForm } from '../../contexts/FormContext';
 import BaseSearchField from './BaseList';
 
 // Necessário passar um array de objetos com os fields e a função de submit
