@@ -22,7 +22,7 @@ const BaseItemList = ({ item }) => {
             )}
         >
             {Object.entries(item).map(([key, value]) => (
-                <div key={key} className="flex-1 truncate">
+                <div key={key} className="flex-1 flex items-center truncate">
                     {value}
                 </div>
             ))}
