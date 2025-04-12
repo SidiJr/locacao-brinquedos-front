@@ -35,7 +35,7 @@ const BaseSearchField = () => {
             {/* Campo de pesquisa */}
             <input
                 type="text"
-                className={clsx("w-full px-4 py-3 rounded-md border",
+                className={clsx("w-full px-4 py-1 rounded-md border",
                     "border-neutral-300 dark:border-neutral-600",
                     "bg-white dark:bg-neutral-900",
                     "placeholder-neutral-400 dark:placeholder-neutral-500",
@@ -52,7 +52,7 @@ const BaseSearchField = () => {
                     {filteredOptions.map((option) => (
                         <li
                             key={option}
-                            className="cursor-pointer py-1 px-2 hover:bg-neutral-200"
+                            className="cursor-pointer py-1 px-1 hover:bg-neutral-200"
                             onClick={() => handleAddItem(option)}
                         >
                             {option}
@@ -67,7 +67,7 @@ const BaseSearchField = () => {
                     <h3>Itens Selecionados:</h3>
                     <ul>
                         {selectedItems.map((item, index) => (
-                            <li key={index} className="border border-neutral-300 rounded-md mt-1 p-2">
+                            <li key={index} className="border border-neutral-300 rounded-md mt-1 p-1">
                                 {item}
                             </li>
                         ))}

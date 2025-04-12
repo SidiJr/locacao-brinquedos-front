@@ -3,7 +3,7 @@ import Input from './BaseInput';
 import BaseButton from './BaseButton';
 import clsx from 'clsx';
 import { useForm } from '../../contexts/FormContext';
-import BaseSearchField from './BaseList';
+import BaseSearchField from './BaseSearchField';
 
 // Necessário passar um array de objetos com os fields e a função de submit
 const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonText, title, showList, hideTotalizador, hideFixedButtons, hideCancelar }) => {
@@ -28,7 +28,7 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
             <form className="w-full flex flex-col items-center gap-4 py-4" onSubmit={handleSubmit}>
                 <p >{title}</p>
                 {/* Envolve os campos */}
-                <div className={clsx("flex flex-col border bg-white p-10 gap-4 rounded-md w-3/4")}>
+                <div className={clsx("flex flex-col border bg-white p-6 gap-2 rounded-md w-3/4")}>
                     {fields.map((field) => (
                         // Envolve cada campo
                         <div key={field.name} >
@@ -47,7 +47,7 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
                     ))}
                 </div>
                 {/* Aqui a lista */}
-                {showList && (<div className={clsx("flex flex-col border bg-white p-10 gap-4 rounded-md w-3/4 items-center")}>
+                {showList && (<div className={clsx("flex flex-col border bg-white p-6 gap-2 rounded-md w-3/4 items-center")}>
                     <BaseSearchField />
                 </div>)}
 

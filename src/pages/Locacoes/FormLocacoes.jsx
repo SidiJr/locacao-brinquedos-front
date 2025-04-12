@@ -1,7 +1,7 @@
 import BaseForm from "../../components/FormElements/BaseForm";
 import { FormProvider } from "../../contexts/FormContext";
 
-const FormLocacao = () => {
+const FormLocacoes = () => {
 
     const fields = [
         {
@@ -33,4 +33,4 @@ const FormLocacao = () => {
 
 }
 
-export default FormLocacao;
+export default FormLocacoes;

@@ -8,7 +8,7 @@ const BaseInput = ({ label, type, name, value, onChange, required, placeholder, 
             {label && <label className={clsx("w-full underline", labelClass)} htmlFor={name}>{label}</label>}
             <input
                 className={clsx(
-                    "w-full px-4 py-3 rounded-md border",
+                    "w-full px-4 py-1 rounded-md border",
                     "border-neutral-300 dark:border-neutral-600",
                     "bg-white dark:bg-neutral-900",
                     "text-neutral-800 dark:text-neutral-100",
