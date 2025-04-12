@@ -24,7 +24,6 @@ const BaseList = () => {
         },
     ];
 
-
     return (
         <section className={clsx("w-full flex flex-col items-center bg-red-100 h-screen")}>
             <div className="w-full flex flex-col items-center gap-4 py-4" >

@@ -19,6 +19,10 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
         //aqui vai ser enviado os dados para o back
     }
 
+    const handleGetData = () => {
+        //Função que recebe os dados do back no update, vai ter que ser ajustado no form
+    }
+
     console.log("formData: ", formData);
 
     return (
