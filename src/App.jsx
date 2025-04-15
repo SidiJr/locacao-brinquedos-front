@@ -9,6 +9,7 @@ import FormClientes from "./pages/Clientes/FormClientes";
 import FormLocacoes from "./pages/Locacoes/FormLocacoes";
 import ListLocacoes from "./pages/Locacoes/ListLocacoes";
 import ListClientes from "./pages/Clientes/ListClientes";
+import SideBar from "./components/UI/SideBar";
 
 function App() {
   return (
@@ -26,17 +27,20 @@ const AuthContent = () => {
   const { isAuthenticated } = useAuth();
 
   return (
-    <div>
-      {isAuthenticated && <NavBar />}
-      <div>
-        <Routes>
-          <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/locacoes/list" element={<ListLocacoes/>} />
-          <Route path="/locacoes/form" element={<FormLocacoes />} />
-          <Route path="/clientes/list" element={<ListClientes />} />
-          <Route path="/clientes/form" element={<FormClientes />} />
-        </Routes>
+    <div className="flex min-h-screen">
+      {isAuthenticated && <SideBar/>}
+      <div className="w-full">
+        {isAuthenticated && <NavBar />}
+        <div>
+          <Routes>
+            <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/locacoes/list" element={<ListLocacoes/>} />
+            <Route path="/locacoes/form" element={<FormLocacoes />} />
+            <Route path="/clientes/list" element={<ListClientes />} />
+            <Route path="/clientes/form" element={<FormClientes />} />
+          </Routes>
+        </div>
       </div>
     </div>
   );

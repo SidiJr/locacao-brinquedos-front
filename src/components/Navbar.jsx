@@ -9,7 +9,7 @@ import NavLink from './UI/NavLink';
 function NavBar() {
   return (
     <nav>
-      <div className="flex w-full items-center justify-between bg-gray-50 border-b border-gray-200 w-full px-4 py-1">
+      <div className="flex w-full items-center justify-between bg-gray-50 border-b-2 border-gray-200 w-full px-4 py-1">
         {/* Left Side */}
         <div className="text-base font-medium text-gray-700 w-20 text-center">
           <NavLink>Home</NavLink>
@@ -18,11 +18,11 @@ function NavBar() {
         {/* Center Search */}
         <span className="flex gap-2">
 
-          <div className="border border-gray-300 rounded-md px-2 py-1">
+          <div className="border-2 border-gray-300 rounded-md">
             <input
               type="text"
               placeholder=""
-              className="outline-none text-sm bg-transparent w-96"
+              className="h-full pl-1 text-sm bg-transparent w-96"
             />
           </div>
           <NavButton>
