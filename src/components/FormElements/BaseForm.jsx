@@ -59,9 +59,9 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
                 <div className="w-2/4">
                     <BaseCard className="p-6">
                         {/* Aqui a lista */}
-                        (<div>
+                        <div>
                             <BaseSearchField />
-                        </div>)
+                        </div>
                     </BaseCard>
                 </div>
                 }

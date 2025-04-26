@@ -1,6 +1,8 @@
 import clsx from 'clsx'
 import React from 'react'
 import BaseButton from '../FormElements/BaseButton';
+import BaseCard from '../UI/Cards/BaseCard';
+import Section from '../UI/Section';
 import BaseItemList from './BaseItemList';
 
 const BaseList = () => {
@@ -25,14 +27,13 @@ const BaseList = () => {
     ];
 
     return (
-        <section className={clsx("w-full flex flex-col items-center bg-red-100 h-screen")}>
-            <div className="w-full flex flex-col items-center gap-4 py-4" >
-                <BaseButton text={"Incluir"} />
-                <div className={clsx("flex flex-col border bg-white p-6 gap-2 rounded-md w-3/4")}>
-                    {listExample.map((item, index) => (<BaseItemList key={index} item={item} />))}
-                </div>
-            </div>
-        </section>
+        <Section className="m-10 !border-0 flex flex-col items-center gap-2">
+            <BaseButton text={"Incluir"}/>
+
+            <BaseCard className="gap-2 flex flex-col p-5">
+                {listExample.map((item, index) => (<BaseItemList key={index} item={item} />))}
+            </BaseCard>
+        </Section>
     )
 }
 

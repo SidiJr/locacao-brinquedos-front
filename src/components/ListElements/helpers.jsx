@@ -1,0 +1,1 @@
+export const listItemCss = "px-4 py-1 rounded-md border-2 border-gray-200 bg-white text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 transition duration-150 ease-in-out flex justify-between items-center"
