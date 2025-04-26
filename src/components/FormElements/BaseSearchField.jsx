@@ -5,6 +5,8 @@ import { inputCss } from './helpers';
 
 const BaseSearchField = () => {
 
+    //IMPORTANTE, falta o botão de lixeira nos itens, talvez eu mude tudo pra div ao invés de lista
+
     const { formData, updateFormData } = useForm();
     const [query, setQuery] = useState(""); // Para armazenar o texto de pesquisa
     const [selectedItems, setSelectedItems] = useState([]); // Para armazenar itens selecionados
@@ -63,7 +65,7 @@ const BaseSearchField = () => {
                     <h3>Itens Selecionados:</h3>
                     <ul>
                         {selectedItems.map((item, index) => (
-                            <li key={index} className="border border-neutral-300 rounded-md mt-1 p-1">
+                            <li key={index} className="border-2 border-gray-200 rounded-md mt-1 p-1">
                                 {item}
                             </li>
                         ))}
