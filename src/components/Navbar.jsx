@@ -1,19 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { pages } from '../lib/utils';
 import SearchIcon from './Icons/SearchIcon';
 import SettingsIcon from './Icons/SettingsIcon';
 import UserIcon from './Icons/UserIcon';
 import NavButton from './UI/NavButton';
-import NavLink from './UI/NavLink';
 
 function NavBar() {
+
+  const path = window.location.pathname;
+
   return (
     <nav>
       <div className="flex w-full items-center justify-between bg-gray-50 border-b-2 border-gray-200 w-full px-4 py-1">
         {/* Left Side */}
-        <div className="text-base font-medium text-gray-700 w-20 text-center">
-          <NavLink>Home</NavLink>
-        </div>
+        <p className="text-base font-medium text-gray-700 w-min text-nowrap text-center underline">{pages.find(page => page.link == path)?.navText}</p>
 
         {/* Center Search */}
         <span className="flex gap-2">
