@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { useForm } from '../../contexts/FormContext';
 import BaseSearchField from './BaseSearchField';
 import Section from '../UI/Section'
-import BaseCard from '../UI/BaseCard';
+import BaseCard from '../UI/Cards/BaseCard';
 
 // Necessário passar um array de objetos com os fields e a função de submit
 const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonText, title, showList, hideTotalizador, hideFixedButtons, hideCancelar }) => {
@@ -66,12 +66,13 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
 
                 {/* Totalizador e botões */}
                 {!hideFixedButtons &&
-                    <BaseCard className="flex p-6 justify-between">
-                        {!hideTotalizador && <div >Aqui vai ter o totalizador</div>}
+                    <BaseCard className="fixed bottom-0 left-0 w-full flex justify-between items-center px-6 py-4 bg-white shadow z-50">
+                        {!hideTotalizador && <div>Aqui vai ter o totalizador</div>}
                         <div>
                             <BaseButton isForm text={buttonText ?? "Salvar"} />
                         </div>
-                    </BaseCard>}
+                    </BaseCard>
+                }
 
             </form>
         </Section>
