@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React, { useState } from 'react'
 import { useForm } from '../../contexts/FormContext';
+import { inputCss } from './helpers';
 
 const BaseSearchField = () => {
 
@@ -35,24 +36,19 @@ const BaseSearchField = () => {
             {/* Campo de pesquisa */}
             <input
                 type="text"
-                className={clsx("w-full px-4 py-1 rounded-md border",
-                    "border-neutral-300 dark:border-neutral-600",
-                    "bg-white dark:bg-neutral-900",
-                    "placeholder-neutral-400 dark:placeholder-neutral-500",
-                    "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
-                    "transition duration-150 ease-in-out",)}
-                placeholder="Pesquise por itens"
+                className={clsx(inputCss)}
+                placeholder="Pesquise por Itens"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
             />
 
             {/* Lista de opções filtradas */}
             {query && (
-                <ul className="border border-neutral-300 rounded-md mt-2 p-2 max-h-40 overflow-y-auto w-full">
+                <ul className="border-2 border-gray-200 rounded-lg mt-2 p-2 max-h-40 overflow-y-auto w-full">
                     {filteredOptions.map((option) => (
                         <li
                             key={option}
-                            className="cursor-pointer py-1 px-1 hover:bg-neutral-200"
+                            className="cursor-pointer py-1 px-1 hover:bg-gray-200"
                             onClick={() => handleAddItem(option)}
                         >
                             {option}

@@ -4,6 +4,8 @@ import BaseButton from './BaseButton';
 import clsx from 'clsx';
 import { useForm } from '../../contexts/FormContext';
 import BaseSearchField from './BaseSearchField';
+import Section from '../UI/Section'
+import BaseCard from '../UI/BaseCard';
 
 // Necessário passar um array de objetos com os fields e a função de submit
 const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonText, title, showList, hideTotalizador, hideFixedButtons, hideCancelar }) => {
@@ -28,44 +30,51 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
     return (
         //Envolve todo o componente
 
-        <section className={clsx("w-full flex flex-col items-center bg-red-100 h-screen")}>
-            <form className="w-full flex flex-col items-center gap-4 py-4" onSubmit={handleSubmit}>
-                <p >{title}</p>
-                {/* Envolve os campos */}
-                <div className={clsx("flex flex-col border bg-white p-6 gap-2 rounded-md w-3/4")}>
-                    {fields.map((field) => (
-                        // Envolve cada campo
-                        <div key={field.name} >
-                            <Input
-                                name={field.name}
-                                type={field.type}
-                                value={formData[field.name] || ''}
-                                onChange={handleChange}
-                                required={field.required}
-                                labelClass={labelClass}
-                                inputClass={inputClass}
-                                label={field.label}
-                                placeholder={field.placeholder}
-                            />
-                        </div>
-                    ))}
+        <Section className="m-10 !border-0 flex flex-col">
+
+            <form onSubmit={handleSubmit} className="flex flex-col gap-6 items-center">
+                <p className='underline'>{title}</p>
+                <div className="w-2/4">
+                    <BaseCard className="p-6">
+                        {fields.map((field) => (
+                            // Envolve cada campo
+                            <div key={field.name}>
+                                <Input
+                                    name={field.name}
+                                    type={field.type}
+                                    value={formData[field.name] || ''}
+                                    onChange={handleChange}
+                                    required={field.required}
+                                    labelClass={labelClass}
+                                    inputClass={inputClass}
+                                    label={field.label}
+                                    placeholder={field.placeholder}
+                                />
+                            </div>
+                        ))}
+                    </BaseCard>
                 </div>
-                {/* Aqui a lista */}
-                {showList && (<div className={clsx("flex flex-col border bg-white p-6 gap-2 rounded-md w-3/4 items-center")}>
-                    <BaseSearchField />
-                </div>)}
+
+                <div className="w-2/4">
+                    <BaseCard className="p-6">
+                        {/* Aqui a lista */}
+                        {showList && (<div>
+                            <BaseSearchField />
+                        </div>)}
+                    </BaseCard>
+                </div>
 
                 {/* Totalizador e botões */}
-                {!hideFixedButtons && <div className={clsx("flex border bg-white p-2 rounded-md w-full items-center justify-between fixed bottom-0")}>
-                    {!hideTotalizador && <div className="border bg-white rounded-md p-6" >Aqui vai ter o totalizador</div>}
-                    <div className='flex gap-2'>
-                        {!hideCancelar && <BaseButton text={"Cancelar"} />}
-                        <BaseButton isForm text={buttonText ?? "Salvar"} />
-                    </div>
-                </div>}
+                {!hideFixedButtons &&
+                    <BaseCard className="flex p-6 justify-between">
+                        {!hideTotalizador && <div >Aqui vai ter o totalizador</div>}
+                        <div>
+                            <BaseButton isForm text={buttonText ?? "Salvar"} />
+                        </div>
+                    </BaseCard>}
 
             </form>
-        </section>
+        </Section>
 
     );
 };
