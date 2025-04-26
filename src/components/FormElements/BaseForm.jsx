@@ -32,9 +32,9 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
 
         <Section className="m-10 !border-0 flex flex-col">
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-6 items-center">
+            <form onSubmit={handleSubmit} className={`flex flex-col gap-6 items-center`}>
                 <p className='underline'>{title}</p>
-                <div className="w-2/4">
+                <div className={`w-2/4 ${formClass}`}>
                     <BaseCard className="p-6">
                         {fields.map((field) => (
                             // Envolve cada campo
@@ -55,14 +55,16 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
                     </BaseCard>
                 </div>
 
+                {showList && 
                 <div className="w-2/4">
                     <BaseCard className="p-6">
                         {/* Aqui a lista */}
-                        {showList && (<div>
+                        (<div>
                             <BaseSearchField />
-                        </div>)}
+                        </div>)
                     </BaseCard>
                 </div>
+                }
 
                 {/* Totalizador e botões */}
                 {!hideFixedButtons &&
@@ -72,6 +74,9 @@ const BaseForm = ({ fields, onSubmit, formClass, labelClass, inputClass, buttonT
                             <BaseButton isForm text={buttonText ?? "Salvar"} />
                         </div>
                     </BaseCard>
+                }
+                {hideFixedButtons &&
+                    <BaseButton isForm text={buttonText ?? "Salvar"} />
                 }
 
             </form>

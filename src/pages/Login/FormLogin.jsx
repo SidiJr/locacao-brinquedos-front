@@ -24,9 +24,9 @@ const FormLogin = () => {
     };
 
     return (
-        <div className="w-full px-50">
+        <div className="w-full px-20 -mt-15">
             <FormProvider>
-                <BaseForm fields={fields} onSubmit={handleSubmit} buttonText={"Entrar"} hideFixedButtons/>
+                <BaseForm fields={fields} formClass={"w-4/5 min-w-60 max-w-90"} onSubmit={handleSubmit} buttonText={"Entrar"} hideFixedButtons hideTotalizador/>
             </FormProvider>
         </div>
     );
