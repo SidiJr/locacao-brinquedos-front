@@ -44,7 +44,7 @@ const BaseSearchField = () => {
 
             {/* Lista de opções filtradas */}
             {query && (
-                <ul className="border-2 border-gray-200 rounded-lg mt-2 p-2 max-h-40 overflow-y-auto w-full">
+                <ul className="border-2 border-gray-200 rounded-md mt-2 p-2 max-h-40 overflow-y-auto w-full">
                     {filteredOptions.map((option) => (
                         <li
                             key={option}
