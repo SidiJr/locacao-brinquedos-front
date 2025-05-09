@@ -27,7 +27,7 @@ const FormLocacoes = () => {
 
     return (
         <FormProvider>
-            <BaseForm fields={fields} title={"Locação"} showList />
+            <BaseForm fields={fields} title={"Locação"} showList baseRoute="/locacoes"/>
         </FormProvider>
     );
 

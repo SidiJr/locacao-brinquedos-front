@@ -1,7 +1,7 @@
 import BaseForm from "../../components/FormElements/BaseForm";
 import { FormProvider } from "../../contexts/FormContext";
 
-const FormTiposBrinquedos = () => {
+const FormTipoBrinquedos = () => {
 
     const fields = [
         {
@@ -30,10 +30,10 @@ const FormTiposBrinquedos = () => {
 
     return (
         <FormProvider>
-            <BaseForm fields={fields} title={"Tipos de Brinquedos"} />
+            <BaseForm fields={fields} title={"Tipos de Brinquedos"} baseRoute="/tipo-brinquedos"/>
         </FormProvider>
     );
 
 }
 
-export default FormTiposBrinquedos;
+export default FormTipoBrinquedos;

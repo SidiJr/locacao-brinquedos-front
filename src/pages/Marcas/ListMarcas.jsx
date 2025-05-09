@@ -1,7 +1,7 @@
 import BaseList from "../../components/ListElements/BaseList";
 import { ListProvider } from "../../contexts/ListContext";
 
-const ListClientes = () => {
+const ListMarcas = () => {
   const fields = ["id", "nome"];
 
   return (
@@ -11,4 +11,4 @@ const ListClientes = () => {
   );
 };
 
-export default ListClientes;
+export default ListMarcas;

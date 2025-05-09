@@ -1,9 +1,14 @@
-import BaseList from '../../components/ListElements/BaseList'
+import BaseList from "../../components/ListElements/BaseList";
+import { ListProvider } from "../../contexts/ListContext";
 
 const ListClientes = () => {
-  return (
-    <BaseList />
-  )
-}
+  const fields = ["id", ""];
 
-export default ListClientes
+  return (
+    <ListProvider>
+      <BaseList baseRoute="/clientes" fields={fields} />
+    </ListProvider>
+  );
+};
+
+export default ListClientes;

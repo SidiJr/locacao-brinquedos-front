@@ -38,7 +38,7 @@ const FormClientes = () => {
 
     return (
         <FormProvider>
-            <BaseForm fields={fields} title={"Cliente"} />
+            <BaseForm fields={fields} title={"Cliente"} baseRoute="/clientes"/>
         </FormProvider>
     );
 

@@ -38,7 +38,7 @@ const FormPagamentos = () => {
 
     return (
         <FormProvider>
-            <BaseForm fields={fields} title={"Pagamentos"} />
+            <BaseForm fields={fields} title={"Pagamentos"} baseRoute="/pagamentos"/>
         </FormProvider>
     );
 

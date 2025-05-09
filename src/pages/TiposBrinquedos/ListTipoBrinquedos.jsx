@@ -1,14 +1,14 @@
 import BaseList from "../../components/ListElements/BaseList";
 import { ListProvider } from "../../contexts/ListContext";
 
-const ListLocacoes = () => {
+const ListTipoBrinquedos = () => {
   const fields = ["id", ""];
 
   return (
     <ListProvider>
-      <BaseList baseRoute="/locacoes" fields={fields} />
+      <BaseList baseRoute="/tipo-brinquedos" fields={fields} />
     </ListProvider>
   );
 };
 
-export default ListLocacoes;
+export default ListTipoBrinquedos;

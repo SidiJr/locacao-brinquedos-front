@@ -31,7 +31,7 @@ const FormUsuarios = () => {
 
     return (
         <FormProvider>
-            <BaseForm fields={fields} title={"Usuários"} />
+            <BaseForm fields={fields} title={"Usuários"} baseRoute="/usuarios"/>
         </FormProvider>
     );
 

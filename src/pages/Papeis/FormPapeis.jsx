@@ -22,7 +22,7 @@ const FormPapeis = () => {
 
     return (
         <FormProvider>
-            <BaseForm fields={fields} title={"Papeis"} />
+            <BaseForm fields={fields} title={"Papeis"} baseRoute="/papeis"/>
         </FormProvider>
     );
 
