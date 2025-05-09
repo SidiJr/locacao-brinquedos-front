@@ -1,13 +1,12 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Input from "./BaseInput";
 import BaseButton from "./BaseButton";
-import clsx from "clsx";
 import { useForm } from "../../contexts/FormContext";
 import BaseSearchField from "./BaseSearchField";
 import Section from "../UI/Section";
 import BaseCard from "../UI/Cards/BaseCard";
 import api from "../../api/axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // Necessário passar um array de objetos com os fields e a função de submit
 const BaseForm = ({
@@ -24,6 +23,9 @@ const BaseForm = ({
 }) => {
   const { formData, updateFormData } = useForm();
   const navigate = useNavigate();
+  const {id} = useParams();
+
+  console.log(id)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,9 +47,18 @@ const BaseForm = ({
       });
   };
 
-  const handleGetData = () => {
-    //Função que recebe os dados do back no update, vai ter que ser ajustado no form
-  };
+  // Esperar rota do back
+  useEffect(()=>{
+    api
+      .get(baseRoute)
+      .then((response) => {
+        //falta o toast
+        console.log(response);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  },[])
 
   return (
     //Envolve todo o componente

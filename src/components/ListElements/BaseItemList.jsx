@@ -30,7 +30,10 @@ const BaseItemList = ({ item, fields, baseRoute, id }) => {
             {value}
           </div>
         ))}
-      <BaseButton text="Deletar" onClick={handleDelete} />
+      <div className="flex gap-2">
+        <BaseButton text="Editar" route={`${baseRoute}/form/${id}`} />
+        <BaseButton text="Deletar" onClick={handleDelete} />
+      </div>
     </div>
   );
 };

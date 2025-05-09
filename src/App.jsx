@@ -39,6 +39,11 @@ const AuthContent = () => {
           <Routes>
             <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
             <Route path="/about" element={<About />} />
+            {/* Marcas */}
+            <Route path="/marcas/list" element={<ListMarcas />} />
+            <Route path="/marcas/form" element={<FormMarcas />} />
+            <Route path="/marcas/form/:id" element={<FormMarcas />} />
+            {/* <Route path="/marcas/:id" element={<FormLocacoes />} /> */}
             {/* Locações */}
             <Route path="/locacoes/list" element={<ListLocacoes />} />
             <Route path="/locacoes/form" element={<FormLocacoes />} />
@@ -48,9 +53,6 @@ const AuthContent = () => {
             {/* Brinquedos */}
             <Route path="/brinquedos/list" element={<ListBrinquedos />} />
             <Route path="/brinquedos/form" element={<FormBrinquedos />} />
-            {/* Marcas */}
-            <Route path="/marcas/list" element={<ListMarcas />} />
-            <Route path="/marcas/form" element={<FormMarcas />} />
           </Routes>
         </div>
       </div>
