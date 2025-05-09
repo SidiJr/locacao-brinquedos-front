@@ -1,12 +1,23 @@
-import clsx from 'clsx';
-import React from 'react';
+import clsx from "clsx";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const BaseButton = ({ isForm, text, className }) => {
+const BaseButton = ({ isForm, text, className, onClick, route }) => {
+  const navigate = useNavigate();
 
+  const handleClick = () => {
+    if (route) {
+      navigate(route);
+    }
+    if (onClick) {
+      onClick();
+    }
+  };
 
   return (
     <button
-      type={isForm ? 'submit' : 'button'}
+      type={isForm ? "submit" : "button"}
+      onClick={handleClick}
       className={clsx(
         "px-6 py-2 text-sm font-medium",
         "rounded-md",
