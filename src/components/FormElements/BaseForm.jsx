@@ -48,16 +48,18 @@ const BaseForm = ({
 
   // Esperar rota do back
   useEffect(() => {
-    api
-      .get(baseRoute)
-      .then((response) => {
-        //falta o toast
-        console.log(response);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, [])
+    if (id) {
+      api
+        .get(baseRoute)
+        .then((response) => {
+          //falta o toast
+          console.log(response);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
+  }, [id])
 
   return (
     //Envolve todo o componente
@@ -82,6 +84,7 @@ const BaseForm = ({
                   inputClass={inputClass}
                   label={field.label}
                   placeholder={field.placeholder}
+                  route={field.route}
                 />
               </div>
             ))}

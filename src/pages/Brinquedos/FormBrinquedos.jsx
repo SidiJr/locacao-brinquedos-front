@@ -16,14 +16,16 @@ const FormClientes = () => {
       required: true,
     },
     {
-      name: "marca",
+      name: "marca_id",
       type: "select",
+      route: "/marcas",
       label: "Marca",
       required: true,
     },
     {
-      name: "tipo_brinquedo",
+      name: "tipo_brinquedo_id",
       type: "select",
+      route: "/tipo-brinquedos",
       label: "Tipo do Brinquedo",
       required: true,
     },
@@ -43,7 +45,7 @@ const FormClientes = () => {
 
   return (
     <FormProvider>
-      <BaseForm fields={fields} title={"Brinquedos"} baseRoute="/brinquedos"/>
+      <BaseForm fields={fields} title={"Brinquedos"} baseRoute="/brinquedos" hideTotalizador/>
     </FormProvider>
   );
 };
