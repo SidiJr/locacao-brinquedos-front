@@ -22,6 +22,8 @@ import ListTipoBrinquedos from "./pages/TiposBrinquedos/ListTipoBrinquedos";
 import FormTipoBrinquedos from "./pages/TiposBrinquedos/FormTipoBrinquedos";
 import ListUsuarios from "./pages/Usuarios/ListUsuarios";
 import FormUsuarios from "./pages/Usuarios/FormUsuarios";
+import FormPagamentos from "./pages/Pagamentos/FormPagamentos";
+import ListPagamentos from "./pages/Pagamentos/ListPagamentos";
 
 function App() {
   return (
@@ -69,6 +71,11 @@ const AuthContent = () => {
             <Route path="/marcas/form" element={<FormMarcas />} />
             <Route path="/marcas/form/:id" element={<FormMarcas />} />
             {/* <Route path="/marcas/:id" element={<Componente de Visualização/>} /> */}
+
+            {/* Pagamentos */}
+            <Route path="/pagamentos/list" element={<ListPagamentos />} />
+            <Route path="/pagamentos/form" element={<FormPagamentos />} />
+            <Route path="/pagamentos/form/:id" element={<FormPagamentos />} />
 
             {/* Papeis */}
             <Route path="/papeis/list" element={<ListPapeis />} />

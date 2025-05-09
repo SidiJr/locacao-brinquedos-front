@@ -1,5 +1,4 @@
-import clsx from "clsx";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import BaseButton from "../FormElements/BaseButton";
 import BaseCard from "../UI/Cards/BaseCard";
 import Section from "../UI/Section";

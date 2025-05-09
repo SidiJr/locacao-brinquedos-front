@@ -18,12 +18,11 @@ const BaseForm = ({
   title,
   showList,
   hideTotalizador,
-  hideFixedButtons,
   baseRoute,
 }) => {
   const { formData, updateFormData } = useForm();
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
 
   console.log(id)
 
@@ -48,7 +47,7 @@ const BaseForm = ({
   };
 
   // Esperar rota do back
-  useEffect(()=>{
+  useEffect(() => {
     api
       .get(baseRoute)
       .then((response) => {
@@ -58,7 +57,7 @@ const BaseForm = ({
       .catch((e) => {
         console.log(e);
       });
-  },[])
+  }, [])
 
   return (
     //Envolve todo o componente
@@ -101,9 +100,16 @@ const BaseForm = ({
         )}
 
         {/* Totalizador e botões */}
-        {!hideFixedButtons && (
+
+        {hideTotalizador ? (
+          <BaseButton
+            isForm
+            text={buttonText ?? "Salvar"}
+            onCLick={() => handleSubmit(e)}
+          />
+        ) : (!hideTotalizador && (
           <BaseCard className="fixed bottom-0 left-60 right-0 flex justify-between items-center px-6 py-4 bg-white shadow z-50">
-            {!hideTotalizador && <div>Aqui vai ter o totalizador</div>}
+            <div>Aqui vai ter o totalizador</div>
             <div>
               <BaseButton
                 isForm
@@ -112,14 +118,8 @@ const BaseForm = ({
               />
             </div>
           </BaseCard>
-        )}
-        {hideFixedButtons && (
-          <BaseButton
-            isForm
-            text={buttonText ?? "Salvar"}
-            onCLick={() => handleSubmit(e)}
-          />
-        )}
+        ))}
+
       </form>
     </Section>
   );

@@ -18,19 +18,11 @@ const FormTipoBrinquedos = () => {
             required: true,
             placeholder: 'Código do tipo de brinquedo',
         },
-        {
-            name: 'cpf_cliente',
-            type: 'text',
-            label: 'CPF Cliente',
-            required: 'true',
-            placeholder: 'CPF do cliente',
-            
-        },
     ];
 
     return (
         <FormProvider>
-            <BaseForm fields={fields} title={"Tipos de Brinquedos"} baseRoute="/tipo-brinquedos"/>
+            <BaseForm fields={fields} title={"Tipos de Brinquedos"} baseRoute="/tipo-brinquedos" hideTotalizador/>
         </FormProvider>
     );
 

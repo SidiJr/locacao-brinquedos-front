@@ -21,7 +21,7 @@ const FormMarcas = () => {
 
   return (
     <FormProvider>
-      <BaseForm fields={fields} title={"Marca"} baseRoute="/marcas"/>
+      <BaseForm fields={fields} title={"Marca"} baseRoute="/marcas" hideTotalizador/>
     </FormProvider>
   );
 };
