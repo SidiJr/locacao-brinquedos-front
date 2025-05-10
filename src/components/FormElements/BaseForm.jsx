@@ -97,7 +97,7 @@ const BaseForm = ({
             <BaseCard className="p-6">
               {/* Aqui a lista */}
               <div>
-                <BaseSearchField />
+                <BaseSearchField baseRoute={baseRoute}/>
               </div>
             </BaseCard>
           </div>

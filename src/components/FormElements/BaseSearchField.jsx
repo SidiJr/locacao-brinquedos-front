@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useForm } from '../../contexts/FormContext';
 import { inputCss } from './helpers';
 
-const BaseSearchField = () => {
+const BaseSearchField = ({baseRoute}) => {
 
     //IMPORTANTE, falta o botão de lixeira nos itens, talvez eu mude tudo pra div ao invés de lista
 
