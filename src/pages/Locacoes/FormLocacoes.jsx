@@ -5,16 +5,21 @@ const FormLocacoes = () => {
 
     const fields = [
         {
-            name: 'cpf',
-            type: 'text',
-            label: 'CPF',
-            required: true,
-            placeholder: 'CPF do Cliente',
-        },
-        {
             name: 'data_atual',
             type: 'date',
             label: 'Data Atual',
+            required: true,
+        },
+        {
+            name: 'valor_unitario',
+            type: 'number',
+            label: 'Valor Unitario',
+            required: true,
+        },
+        {
+            name: 'valor_total',
+            type: 'number',
+            label: 'Valor Total',
             required: true,
         },
         {
@@ -23,6 +28,14 @@ const FormLocacoes = () => {
             label: 'Data Devolução',
             required: true,
         },
+        {
+            name: 'cpf',
+            type: 'text',
+            label: 'CPF',
+            required: true,
+            placeholder: 'CPF do Cliente',
+        },
+
     ];
 
     return (

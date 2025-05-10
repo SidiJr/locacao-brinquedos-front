@@ -34,6 +34,30 @@ const FormPagamentos = () => {
             placeholder: 'Valor total do pagamento',
             
         },
+        {
+            name: 'valor_locacao',
+            type: 'number',
+            label: 'Valor Locacao',
+            required: 'true',
+            placeholder: 'Valor total do pagamento',
+            
+        },
+        {
+            name: 'data_pagamento',
+            type: 'date',
+            label: 'Data Pagamento',
+            required: 'true',
+            placeholder: 'Data do pagamento',
+            
+        },
+        {
+            name: 'locacao_id',
+            type: 'select',
+            label: 'Locação',
+            required: 'true',
+            placeholder: 'Locação',
+            
+        },
     ];
 
     return (
