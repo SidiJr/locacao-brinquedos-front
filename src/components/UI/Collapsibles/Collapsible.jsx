@@ -59,10 +59,10 @@ const Collapsible = ({ title, children, className = '' }) => {
             </button>
 
             {/* Collapsible Content Area - Applying style object */}
-            <div style={contentStyle}>
+            <div style={contentStyle} className="rounded-md">
                 {/* Inner div with ref for height measurement */}
                 {/* Tailwind for padding/border is still fine here */}
-                <div ref={contentRef} className="p-4 border-gray-200 bg-white">
+                <div ref={contentRef} className="p-4 rounded-md border-gray-200 bg-white">
                     {children}
                 </div>
             </div>

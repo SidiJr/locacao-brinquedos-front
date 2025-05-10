@@ -1,34 +1,24 @@
 import React from 'react';
 import { pages } from '../lib/utils';
-import SearchIcon from './Icons/SearchIcon';
 import SettingsIcon from './Icons/SettingsIcon';
 import UserIcon from './Icons/UserIcon';
 import NavButton from './UI/NavButton';
+import SearchBar from './UI/SearchBar';
 
 function NavBar() {
 
   const path = window.location.pathname;
 
+  const currentPage = pages.find(page => page.link == path);
+
   return (
     <nav>
       <div className="flex w-full items-center justify-between bg-gray-50 border-b-2 border-gray-200 w-full px-4 py-1">
         {/* Left Side */}
-        <p className="text-base font-medium text-gray-700 w-min text-nowrap text-center underline">{pages.find(page => page.link == path)?.navText}</p>
+        <p className="text-base font-medium text-gray-700 w-full max-w-30 text-nowrap text-center underline">{`${currentPage?.section.toUpperCase()} > ${currentPage?.title.toUpperCase()}`}</p>
 
         {/* Center Search */}
-        <span className="flex gap-2">
-
-          <div className="border-2 border-gray-300 rounded-md">
-            <input
-              type="text"
-              placeholder=""
-              className="h-full pl-1 text-sm bg-transparent w-96"
-            />
-          </div>
-          <NavButton>
-            <SearchIcon />
-          </NavButton>
-        </span>
+        <SearchBar/>
 
         {/* Right Side */}
         <div className="flex items-center ">

@@ -1,25 +1,33 @@
 
 const returnTab = (title, pages) => ({title, pages});
-const returnpage = (title, link, navText) => ({title, link, navText});
+const returnpage = (title, link) => ({title, link});
 
 const adminPages = [
-    returnpage("Dashboard","/","Home"),
-    returnpage("Permissões","1"),
-    returnpage("Papéis","2"),
-    returnpage("Usuários","3"),
-];
+
+    returnpage("Dashboard","/"),
+    returnpage("Permissões","/permissoes/list"),
+    returnpage("Papéis","/papeis/list"),
+    returnpage("Usuários","/usuarios/list"),
+
+].map(page => ({...page, section:"Administrador"}));
+
 
 const registryPages = [
+
     returnpage("Clientes","/clientes/list"),
-    returnpage("Brinquedos","4"),
-    returnpage("Tipo Brinquedo","5"),
-    returnpage("Marca","6"),
-    returnpage("Pagamento","7"),
-];
+    returnpage("Brinquedos","/brinquedos/list"),
+    returnpage("Tipo Brinquedo","/tipo-brinquedos/list"),
+    returnpage("Marca","/marcas/list"),
+    returnpage("Pagamento","/pagamentos/list"),
+
+].map(page => ({...page, section:"Cadastros"}));
 
 const processPages = [
-    returnpage("Locação","/locacoes/list","Incluir Locação"),
-];
+
+    returnpage("Locação","/locacoes/list"),
+
+].map(page => ({...page, section:"Processos"}));
+
 
 export const pages = [
     ...adminPages,
