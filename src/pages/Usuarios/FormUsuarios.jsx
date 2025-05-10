@@ -15,7 +15,7 @@ const FormUsuarios = () => {
             name: 'cpf_usuario',
             type: 'text',
             label: 'CPF Usuario',
-            required: 'true',
+            required: true,
             placeholder: 'CPF do usuário',
             
         },
@@ -23,7 +23,7 @@ const FormUsuarios = () => {
             name: 'telefone',
             type: 'text',
             label: 'Telefone Usuario',
-            required: 'true',
+            required: true,
             placeholder: 'Telefone do usuário',
             
         },

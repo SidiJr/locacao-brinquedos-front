@@ -1,20 +1,26 @@
 import clsx from 'clsx';
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../../api/axios';
 import { inputCss } from './helpers';
 
 const BaseInput = ({ label, type, name, value, onChange, required, placeholder, inputClass, labelClass, route }) => {
 
     const [selectData, setSelectData] = useState([]);
+    const [selectedValue, setSelectedValue] = useState(value);
+
+    // Função chamada ao selecionar uma opção
+    const handleSelectChange = (e) => {
+        const newValue = e.target.value;
+        setSelectedValue(newValue);
+        onChange && onChange(e);
+    };
 
     useEffect(() => {
         if (type === "select" && route) {
             api
                 .get(route)
                 .then((response) => {
-                    // Adicionar o toast aqui
-                    setSelectData(response.data)
+                    setSelectData(response.data);
                     console.log(response);
                 })
                 .catch((e) => {
@@ -22,6 +28,10 @@ const BaseInput = ({ label, type, name, value, onChange, required, placeholder, 
                 });
         }
     }, [type, route]);
+
+    useEffect(() => {
+        setSelectedValue(value);
+    }, [value]);
 
     return (
         <div className="my-2">
@@ -32,12 +42,11 @@ const BaseInput = ({ label, type, name, value, onChange, required, placeholder, 
                         className={clsx(inputCss, inputClass)}
                         name={name}
                         id={name}
-                        value={value}
-                        onChange={onChange}
+                        value={selectedValue}
+                        onChange={handleSelectChange}
                         required={required}
                     >
-                        <option value="" disabled selected>Escolha uma opção...</option>
-
+                        <option value="" disabled>Escolha uma opção...</option>
                         {selectData.map((option, index) => (
                             <option key={index} value={option.id}>
                                 {option.nome}
@@ -49,10 +58,7 @@ const BaseInput = ({ label, type, name, value, onChange, required, placeholder, 
                 <>
                     {label && <label className={clsx("underline", labelClass)} htmlFor={name}>{label}</label>}
                     <input
-                        className={clsx(
-                            inputCss,
-                            inputClass
-                        )}
+                        className={clsx(inputCss, inputClass)}
                         type={type}
                         name={name}
                         id={name}

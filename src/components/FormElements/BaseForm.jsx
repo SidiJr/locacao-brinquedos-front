@@ -20,11 +20,10 @@ const BaseForm = ({
   hideTotalizador,
   baseRoute,
 }) => {
-  const { formData, updateFormData } = useForm();
+  const { formData, updateFormData, setFormData } = useForm();
   const navigate = useNavigate();
   const { id } = useParams();
 
-  console.log(id)
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,12 +31,13 @@ const BaseForm = ({
   };
 
   const handleSubmit = (e) => {
-    //aqui vão ser enviados os dados para o back
     e.preventDefault();
-    api
-      .post(baseRoute, formData)
+
+    const requestUrl = id ? `${baseRoute}/${id}` : baseRoute;
+    const method = id ? 'put' : 'post';
+
+    api[method](requestUrl, formData)
       .then((response) => {
-        //falta o toast
         console.log(response);
         navigate(`${baseRoute}/list`);
       })
@@ -46,14 +46,15 @@ const BaseForm = ({
       });
   };
 
-  // Esperar rota do back
+
+  
   useEffect(() => {
     if (id) {
       api
-        .get(baseRoute)
+        .get(`${baseRoute}/${id}`)
         .then((response) => {
           //falta o toast
-          console.log(response);
+          setFormData(response.data)
         })
         .catch((e) => {
           console.log(e);
