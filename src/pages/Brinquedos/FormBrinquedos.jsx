@@ -8,12 +8,14 @@ const FormClientes = () => {
       type: "text",
       label: "Nome",
       required: true,
+      placeholder: "Nome",
     },
     {
       name: "codigo",
       type: "number",
       label: "Código",
       required: true,
+      placeholder: "Código",
     },
     {
       name: "marca_id",
@@ -34,6 +36,7 @@ const FormClientes = () => {
       type: "number",
       label: "Valor da Locação",
       required: true,
+      placeholder: "Valor da Locação",
     },
     {
       name: "data_aquisicao",
@@ -45,7 +48,12 @@ const FormClientes = () => {
 
   return (
     <FormProvider>
-      <BaseForm fields={fields} title={"Brinquedos"} baseRoute="/brinquedos" hideTotalizador/>
+      <BaseForm
+        fields={fields}
+        title={"Brinquedos"}
+        baseRoute="/brinquedos"
+        hideTotalizador
+      />
     </FormProvider>
   );
 };
