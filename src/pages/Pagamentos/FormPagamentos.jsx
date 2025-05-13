@@ -20,9 +20,9 @@ const FormPagamentos = () => {
     {
       name: "cpf_cliente",
       type: "text",
-      label: "CPF do Cliente",
+      label: "CPF",
       required: "true",
-      placeholder: "CPF do cliente",
+      placeholder: "CPF",
     },
     {
       name: "valor_total_pagamento",

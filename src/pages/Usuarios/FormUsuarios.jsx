@@ -9,29 +9,29 @@ const FormUsuarios = () => {
             type: 'text',
             label: 'Nome',
             required: true,
-            placeholder: 'Nome do usuario',
+            placeholder: 'Nome',
         },
         {
             name: 'cpf_usuario',
             type: 'text',
-            label: 'CPF Usuario',
+            label: 'CPF',
             required: true,
-            placeholder: 'CPF do usuário',
+            placeholder: 'CPF',
             
         },
         {
             name: 'telefone',
             type: 'text',
-            label: 'Telefone Usuario',
+            label: 'Telefone',
             required: true,
-            placeholder: 'Telefone do usuário',
+            placeholder: 'Telefone',
             
         },
     ];
 
     return (
         <FormProvider>
-            <BaseForm fields={fields} title={"Usuários"} baseRoute="/usuarios"/>
+            <BaseForm fields={fields} title={"Usuários"} baseRoute="/usuarios" hideTotalizador/>
         </FormProvider>
     );
 

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Input from "./BaseInput";
 import BaseButton from "./BaseButton";
 import { useForm } from "../../contexts/FormContext";
@@ -7,6 +7,7 @@ import Section from "../UI/Section";
 import BaseCard from "../UI/Cards/BaseCard";
 import api from "../../api/axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { generateSchema } from "./helpers";
 
 // Necessário passar um array de objetos com os fields e a função de submit
 const BaseForm = ({
@@ -23,44 +24,71 @@ const BaseForm = ({
   const { formData, updateFormData, setFormData } = useForm();
   const navigate = useNavigate();
   const { id } = useParams();
-
+  const [validationErrors, setValidationErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     updateFormData(name, value);
   };
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const requestUrl = id ? `${baseRoute}/${id}` : baseRoute;
+  //   const method = id ? "put" : "post";
+
+  //   api[method](requestUrl, formData)
+  //     .then((response) => {
+  //       console.log(response);
+  //       navigate(`${baseRoute}/list`);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const requestUrl = id ? `${baseRoute}/${id}` : baseRoute;
-    const method = id ? 'put' : 'post';
+    const schema = generateSchema(fields);
 
-    api[method](requestUrl, formData)
-      .then((response) => {
-        console.log(response);
-        navigate(`${baseRoute}/list`);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    console.log(schema);
+
+    try {
+      // Validação manual com Yup
+      await schema.validate(formData, { abortEarly: false });
+
+      const requestUrl = id ? `${baseRoute}/${id}` : baseRoute;
+      const method = id ? "put" : "post";
+
+      await api[method](requestUrl, formData);
+      navigate(`${baseRoute}/list`);
+    } catch (err) {
+      if (err.name === "ValidationError") {
+        const errors = {};
+        err.inner.forEach((error) => {
+          errors[error.path] = error.message;
+        });
+        setValidationErrors(errors);
+      } else {
+        console.error(err);
+      }
+    }
   };
 
-
-  
   useEffect(() => {
     if (id) {
       api
         .get(`${baseRoute}/${id}`)
         .then((response) => {
           //falta o toast
-          setFormData(response.data)
+          setFormData(response.data);
         })
         .catch((e) => {
           console.log(e);
         });
     }
-  }, [id])
+  }, [baseRoute, id, setFormData]);
 
   return (
     //Envolve todo o componente
@@ -68,6 +96,7 @@ const BaseForm = ({
       <form
         onSubmit={handleSubmit}
         className={`flex flex-col gap-6 items-center`}
+        noValidate
       >
         <p className="underline">{title}</p>
         <div className={`w-2/4 ${formClass}`}>
@@ -86,6 +115,7 @@ const BaseForm = ({
                   label={field.label}
                   placeholder={field.placeholder}
                   route={field.route}
+                  error={validationErrors[field.name]}
                 />
               </div>
             ))}
@@ -97,7 +127,7 @@ const BaseForm = ({
             <BaseCard className="p-6">
               {/* Aqui a lista */}
               <div>
-                <BaseSearchField baseRoute={baseRoute}/>
+                <BaseSearchField baseRoute={baseRoute} />
               </div>
             </BaseCard>
           </div>
@@ -106,24 +136,21 @@ const BaseForm = ({
         {/* Totalizador e botões */}
 
         {hideTotalizador ? (
-          <BaseButton
-            isForm
-            text={buttonText ?? "Salvar"}
-            onCLick={() => handleSubmit(e)}
-          />
-        ) : (!hideTotalizador && (
-          <BaseCard className="fixed bottom-0 left-60 right-0 flex justify-between items-center px-6 py-4 bg-white shadow z-50">
-            <div>Aqui vai ter o totalizador</div>
-            <div>
-              <BaseButton
-                isForm
-                text={buttonText ?? "Salvar"}
-                onCLick={() => handleSubmit(e)}
-              />
-            </div>
-          </BaseCard>
-        ))}
-
+          <BaseButton isForm text={buttonText ?? "Salvar"} type="submit" />
+        ) : (
+          !hideTotalizador && (
+            <BaseCard className="fixed bottom-0 left-60 right-0 flex justify-between items-center px-6 py-4 bg-white shadow z-50">
+              <div>Aqui vai ter o totalizador</div>
+              <div>
+                <BaseButton
+                  isForm
+                  text={buttonText ?? "Salvar"}
+                  type="submit"
+                />
+              </div>
+            </BaseCard>
+          )
+        )}
       </form>
     </Section>
   );
