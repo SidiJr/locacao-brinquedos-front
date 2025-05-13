@@ -21,7 +21,7 @@ const FormUsuarios = () => {
         },
         {
             name: 'telefone',
-            type: 'text',
+            type: 'tel',
             label: 'Telefone',
             required: true,
             placeholder: 'Telefone',

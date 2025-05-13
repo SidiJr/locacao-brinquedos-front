@@ -21,7 +21,7 @@ const FormPapeis = () => {
 
   return (
     <FormProvider>
-      <BaseForm fields={fields} title={"Papeis"} baseRoute="/papeis" hideTotalizador/>
+      <BaseForm fields={fields} title={"Papéis"} baseRoute="/papeis" hideTotalizador/>
     </FormProvider>
   );
 };

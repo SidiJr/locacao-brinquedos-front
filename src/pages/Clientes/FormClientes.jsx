@@ -43,7 +43,7 @@ const FormClientes = () => {
     <FormProvider>
       <BaseForm
         fields={fields}
-        title={"Cliente"}
+        title={"Clientes"}
         baseRoute="/clientes"
         hideTotalizador
       />

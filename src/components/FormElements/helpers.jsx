@@ -78,10 +78,7 @@ export const generateSchema = (fields) => {
         validator = yup
           .string()
           .transform((value) => (value === "" ? undefined : value))
-          .matches(
-            /^(?:\(?\d{2}\)?\s?)?\d{5}\d{4}$/,
-            "Número de telefone inválido!"
-          );
+          .matches(/^\d{10,11}$/, "Informe o DDD e o número de telefone!");
         break;
 
       default:

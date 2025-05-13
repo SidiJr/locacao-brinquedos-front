@@ -9,7 +9,7 @@ const FormPermissoes = () => {
 
     return (
         <FormProvider>
-            <BaseForm fields={fields} title={"Permissoes"} baseRoute="/permissoes"/>
+            <BaseForm fields={fields} title={"Permissões"} baseRoute="/permissoes" hideTotalizador/>
         </FormProvider>
     );
 
