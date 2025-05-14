@@ -17,10 +17,7 @@ const FormLogin = () => {
         },
     ];
 
-    // Função para processar o envio do formulário
     const handleSubmit = (data) => {
-        console.log('Formulário de login enviado com os dados:', data);
-        // Aqui você pode chamar uma API ou executar qualquer ação com os dados
     };
 
     return (

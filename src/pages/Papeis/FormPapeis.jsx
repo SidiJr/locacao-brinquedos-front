@@ -12,7 +12,7 @@ const FormPapeis = () => {
     },
     {
       name: "codigo",
-      type: "text",
+      type: "number",
       label: "Código",
       required: true,
       placeholder: "Código",

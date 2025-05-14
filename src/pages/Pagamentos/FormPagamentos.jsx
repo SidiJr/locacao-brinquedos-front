@@ -12,7 +12,7 @@ const FormPagamentos = () => {
     },
     {
       name: "codigo",
-      type: "text",
+      type: "number",
       label: "Código",
       required: true,
       placeholder: "Código",
@@ -28,28 +28,28 @@ const FormPagamentos = () => {
       name: "valor_total_pagamento",
       type: "number",
       label: "Valor Total do Pagamento",
-      required: "true",
+      required: true,
       placeholder: "Valor Total do Pagamento",
     },
     {
       name: "valor_locacao",
       type: "number",
       label: "Valor Locacao",
-      required: "true",
+      required: true,
       placeholder: "Valor da Locação",
     },
     {
       name: "data_pagamento",
       type: "date",
       label: "Data do Pagamento",
-      required: "true",
+      required: true,
     },
     {
       name: "locacao_id",
       type: "select",
       label: "Locação",
-      required: "true",
-      rota: "/locacoes",
+      required: true,
+      route: "/locacoes",
     },
   ];
 

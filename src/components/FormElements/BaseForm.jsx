@@ -8,6 +8,7 @@ import BaseCard from "../UI/Cards/BaseCard";
 import api from "../../api/axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { generateSchema } from "./helpers";
+import { toast } from "react-toastify";
 
 // Necessário passar um array de objetos com os fields e a função de submit
 const BaseForm = ({
@@ -31,49 +32,35 @@ const BaseForm = ({
     updateFormData(name, value);
   };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-
-  //   const requestUrl = id ? `${baseRoute}/${id}` : baseRoute;
-  //   const method = id ? "put" : "post";
-
-  //   api[method](requestUrl, formData)
-  //     .then((response) => {
-  //       console.log(response);
-  //       navigate(`${baseRoute}/list`);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const schema = generateSchema(fields);
 
-    console.log(schema);
+    schema
+      .validate(formData, { abortEarly: false })
+      .then(() => {
+        const requestUrl = id ? `${baseRoute}/${id}` : baseRoute;
+        const method = id ? "put" : "post";
 
-    try {
-      // Validação manual com Yup
-      await schema.validate(formData, { abortEarly: false });
-
-      const requestUrl = id ? `${baseRoute}/${id}` : baseRoute;
-      const method = id ? "put" : "post";
-
-      await api[method](requestUrl, formData);
-      navigate(`${baseRoute}/list`);
-    } catch (err) {
-      if (err.name === "ValidationError") {
-        const errors = {};
-        err.inner.forEach((error) => {
-          errors[error.path] = error.message;
-        });
-        setValidationErrors(errors);
-      } else {
-        console.error(err);
-      }
-    }
+        return api[method](requestUrl, formData);
+      })
+      .then((response) => {
+        toast.success(response.data);
+        navigate(`${baseRoute}/list`);
+      })
+      .catch((err) => {
+        if (err.name === "ValidationError") {
+          const errors = {};
+          err.inner.forEach((error) => {
+            errors[error.path] = error.message;
+          });
+          setValidationErrors(errors);
+        } else {
+          console.error(err);
+          toast.error(err.response.data.message);
+        }
+      });
   };
 
   useEffect(() => {
@@ -136,7 +123,12 @@ const BaseForm = ({
         {/* Totalizador e botões */}
 
         {hideTotalizador ? (
-          <BaseButton isForm text={buttonText ?? "Salvar"} type="submit" />
+          <BaseButton
+            isForm
+            text={buttonText ?? "Salvar"}
+            type="submit"
+            action="incluir"
+          />
         ) : (
           !hideTotalizador && (
             <BaseCard className="fixed bottom-0 left-60 right-0 flex justify-between items-center px-6 py-4 bg-white shadow z-50">
@@ -146,6 +138,7 @@ const BaseForm = ({
                   isForm
                   text={buttonText ?? "Salvar"}
                   type="submit"
+                  action="incluir"
                 />
               </div>
             </BaseCard>

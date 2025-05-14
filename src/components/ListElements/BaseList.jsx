@@ -25,7 +25,7 @@ const BaseList = ({ baseRoute, fields }) => {
 
   return (
     <Section className="m-10 !border-0 flex flex-col items-center gap-2">
-      <BaseButton text={"Incluir"} route={`${baseRoute}/form`} />
+      <BaseButton text={"Incluir"} route={`${baseRoute}/form`} action="incluir"/>
 
       <BaseCard className="gap-2 flex flex-col p-5">
         {isSearchingData ? (

@@ -32,7 +32,6 @@ const BaseInput = ({
         .get(route)
         .then((response) => {
           setSelectData(response.data);
-          console.log(response);
         })
         .catch((e) => {
           console.log(e);
@@ -66,7 +65,7 @@ const BaseInput = ({
             </option>
             {selectData.map((option, index) => (
               <option key={index} value={option.id}>
-                {option.nome}
+                {option.nome ?? option.codigo}
               </option>
             ))}
           </select>
@@ -91,7 +90,9 @@ const BaseInput = ({
         </>
       )}
       {error && (
-        <p className="text-red-500 text-sm mt-1 flex justify-center">{error}</p>
+        <p className="text-red-500 text-sm mt-1 flex justify-center text-center">
+          {error}
+        </p>
       )}
     </div>
   );

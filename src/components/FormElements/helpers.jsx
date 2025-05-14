@@ -91,7 +91,7 @@ export const generateSchema = (fields) => {
       validator = yup
         .string()
         .transform((value) => (value === "" ? undefined : value))
-        .test("cpf-valido", "CPF inválido!", (value) =>
+        .test("cpf-valido", "CPF inválido! O CPF deve conter somente números!", (value) =>
           value ? isValidCPF(value) : false
         );
     }
