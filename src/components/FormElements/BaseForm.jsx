@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Input from "./BaseInput";
 import BaseButton from "./BaseButton";
 import { useForm } from "../../contexts/FormContext";
@@ -10,7 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { generateSchema } from "./helpers";
 import { toast } from "react-toastify";
 
-// Necessário passar um array de objetos com os fields e a função de submit
+// Necessário passar um array de objetos com os fields
 const BaseForm = ({
   fields,
   formClass,
@@ -68,7 +68,6 @@ const BaseForm = ({
       api
         .get(`${baseRoute}/${id}`)
         .then((response) => {
-          //falta o toast
           setFormData(response.data);
         })
         .catch((e) => {
@@ -76,6 +75,23 @@ const BaseForm = ({
         });
     }
   }, [baseRoute, id, setFormData]);
+
+  const total = useMemo(() => {
+    return (
+      formData.items?.reduce((acc, item) => {
+        return acc + (item.quantidade || 0) * (item.valor_locacao || 0);
+      }, 0) || 0
+    ).toFixed(2);
+  }, [formData.items]);
+
+  useEffect(() => {
+    if (!hideTotalizador && total) {
+      updateFormData("valor_total", total);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total]);
+
+  console.log(formData, total);
 
   return (
     //Envolve todo o componente
@@ -86,7 +102,7 @@ const BaseForm = ({
         noValidate
       >
         <p className="underline">{title}</p>
-        <div className={`w-2/4 ${formClass}`}>
+        <div className={`w-96 ${formClass}`}>
           <BaseCard className="p-6">
             {fields.map((field) => (
               // Envolve cada campo
@@ -110,7 +126,7 @@ const BaseForm = ({
         </div>
 
         {showList && (
-          <div className="w-2/4">
+          <div className="w-96">
             <BaseCard className="p-6">
               {/* Aqui a lista */}
               <div>
@@ -132,7 +148,7 @@ const BaseForm = ({
         ) : (
           !hideTotalizador && (
             <BaseCard className="fixed bottom-0 left-60 right-0 flex justify-between items-center px-6 py-4 bg-white shadow z-50">
-              <div>Aqui vai ter o totalizador</div>
+              <div>Valor Total da Locação: R$ {total}</div>
               <div>
                 <BaseButton
                   isForm

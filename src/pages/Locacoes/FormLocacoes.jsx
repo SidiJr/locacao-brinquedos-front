@@ -4,6 +4,21 @@ import { FormProvider } from "../../contexts/FormContext";
 const FormLocacoes = () => {
   const fields = [
     {
+      name: "codigo",
+      type: "number",
+      label: "Código",
+      required: true,
+      placeholder: "Código",
+    },
+    {
+      name: "cliente_id",
+      type: "select",
+      label: "Cliente",
+      required: true,
+      placeholder: "Cliente",
+      route: "/clientes",
+    },
+    {
       name: "data_atual",
       type: "date",
       label: "Data Atual",
@@ -27,13 +42,6 @@ const FormLocacoes = () => {
       type: "date",
       label: "Data de Devolução",
       required: true,
-    },
-    {
-      name: "cpf",
-      type: "text",
-      label: "CPF",
-      required: true,
-      placeholder: "CPF do Cliente",
     },
   ];
 

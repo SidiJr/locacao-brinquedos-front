@@ -15,10 +15,15 @@ const BaseItemList = ({ item, fields, baseRoute, id }) => {
       .then((response) => {
         const newList = listData.filter((i) => i.id !== id);
         setListData(newList);
-        toast.success(response.data);
+        toast.success(response.data.message ?? "Excluído com sucesso!");
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        console.error(error);
+        if (error.response?.data?.error) {
+          toast.error(error.response.data.error);
+        } else {
+          toast.error("Erro desconhecido ao deletar.");
+        }
       });
   };
 

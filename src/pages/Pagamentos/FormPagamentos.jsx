@@ -21,7 +21,7 @@ const FormPagamentos = () => {
       name: "cpf_cliente",
       type: "text",
       label: "CPF",
-      required: "true",
+      required: true,
       placeholder: "CPF",
     },
     {
