@@ -4,9 +4,10 @@ import { useForm } from "../../contexts/FormContext";
 import { inputCss } from "./helpers";
 import api from "../../api/axios";
 import BaseButton from "./BaseButton";
+import { toast } from "react-toastify";
 
 const BaseSearchField = () => {
-  const { updateFormData } = useForm();
+  const { formData, updateFormData } = useForm();
   const [query, setQuery] = useState("");
   const [resultados, setResultados] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
@@ -42,9 +43,36 @@ const BaseSearchField = () => {
     }, 500);
   }, [query]);
 
+  //aqui
+  const [loadFormData, setLoadFormData] = useState(true);
+
+  useEffect(() => {
+    if (
+      loadFormData &&
+      Array.isArray(formData.items) &&
+      formData.items.length > 0
+    ) {
+      const updatedItems = formData.items.map((item) => ({
+        ...item,
+      }));
+      setSelectedItems(updatedItems);
+      setLoadFormData(false);
+    }
+  }, [formData, loadFormData]);
+
   const handleAddItem = (item) => {
     if (!selectedItems.some((i) => i.id === item.id)) {
-      const updated = [...selectedItems, { ...item, quantidade: 1 }];
+      const updated = [
+        ...selectedItems,
+        {
+          id: item.id,
+          quantidade: 1,
+          brinquedo_id: item.id,
+          valor_unitario: item.valor_locacao,
+          valor_total_item: item.valor_locacao,
+          nome: item.nome,
+        },
+      ];
       setSelectedItems(updated);
       updateFormData("items", updated);
     }
@@ -56,6 +84,19 @@ const BaseSearchField = () => {
     const updated = selectedItems.filter((item) => item.id !== id);
     setSelectedItems(updated);
     updateFormData("items", updated);
+    api
+      .delete(`/locacao-items/${id}`)
+      .then((response) => {
+        toast.success(response.data.message);
+      })
+      .catch((error) => {
+        console.error(error);
+        if (error.response?.data?.error) {
+          toast.error(error.response.data.error);
+        } else {
+          toast.error("Erro desconhecido ao deletar.");
+        }
+      });
   };
 
   return (
@@ -101,7 +142,10 @@ const BaseSearchField = () => {
                 key={item.id}
                 className="border-2 border-gray-200 rounded-md mt-1 p-1 flex justify-between items-center"
               >
-                <span>{item.nome}</span>
+                <div>
+                  <p>{item.nome ?? item.brinquedo_nome}</p>
+                  <p>R${Number(item.valor_total_item).toFixed(2)}</p>
+                </div>
 
                 <div className="flex items-center gap-2">
                   {/* Botão diminuir quantidade */}
@@ -109,14 +153,20 @@ const BaseSearchField = () => {
                     type="button"
                     className="px-2 py-1 border rounded hover:bg-gray-200"
                     onClick={() => {
-                      const updated = selectedItems.map((i) =>
-                        i.id === item.id
-                          ? {
-                              ...i,
-                              quantidade: Math.max(1, (i.quantidade || 1) - 1),
-                            }
-                          : i
-                      );
+                      const updated = selectedItems.map((i) => {
+                        if (i.id === item.id) {
+                          const novaQuantidade = Math.max(
+                            1,
+                            (i.quantidade || 1) - 1
+                          );
+                          return {
+                            ...i,
+                            quantidade: novaQuantidade,
+                            valor_total_item: i.valor_unitario * novaQuantidade,
+                          };
+                        }
+                        return i;
+                      });
                       setSelectedItems(updated);
                       updateFormData("items", updated);
                     }}
@@ -132,11 +182,17 @@ const BaseSearchField = () => {
                     type="button"
                     className="px-2 py-1 border rounded hover:bg-gray-200"
                     onClick={() => {
-                      const updated = selectedItems.map((i) =>
-                        i.id === item.id
-                          ? { ...i, quantidade: (i.quantidade || 1) + 1 }
-                          : i
-                      );
+                      const updated = selectedItems.map((i) => {
+                        if (i.id === item.id) {
+                          const novaQuantidade = (i.quantidade || 1) + 1;
+                          return {
+                            ...i,
+                            quantidade: novaQuantidade,
+                            valor_total_item: i.valor_unitario * novaQuantidade,
+                          };
+                        }
+                        return i;
+                      });
                       setSelectedItems(updated);
                       updateFormData("items", updated);
                     }}

@@ -79,7 +79,7 @@ const BaseForm = ({
   const total = useMemo(() => {
     return (
       formData.items?.reduce((acc, item) => {
-        return acc + (item.quantidade || 0) * (item.valor_locacao || 0);
+        return acc + (item.quantidade || 0) * (item.valor_unitario || 0);
       }, 0) || 0
     ).toFixed(2);
   }, [formData.items]);
@@ -90,8 +90,6 @@ const BaseForm = ({
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [total]);
-
-  console.log(formData, total);
 
   return (
     //Envolve todo o componente
