@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Input from "./BaseInput";
 import BaseButton from "./BaseButton";
 import { useForm } from "../../contexts/FormContext";
@@ -7,8 +7,10 @@ import Section from "../UI/Section";
 import BaseCard from "../UI/Cards/BaseCard";
 import api from "../../api/axios";
 import { useNavigate, useParams } from "react-router-dom";
+import { generateSchema } from "./helpers";
+import { toast } from "react-toastify";
 
-// Necessário passar um array de objetos com os fields e a função de submit
+// Necessário passar um array de objetos com os fields
 const BaseForm = ({
   fields,
   formClass,
@@ -20,46 +22,74 @@ const BaseForm = ({
   hideTotalizador,
   baseRoute,
 }) => {
-  const { formData, updateFormData } = useForm();
+  const { formData, updateFormData, setFormData } = useForm();
   const navigate = useNavigate();
   const { id } = useParams();
-
-  console.log(id)
+  const [validationErrors, setValidationErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     updateFormData(name, value);
   };
 
-  const handleSubmit = (e) => {
-    //aqui vão ser enviados os dados para o back
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    api
-      .post(baseRoute, formData)
+
+    const schema = generateSchema(fields);
+
+    schema
+      .validate(formData, { abortEarly: false })
+      .then(() => {
+        const requestUrl = id ? `${baseRoute}/${id}` : baseRoute;
+        const method = id ? "put" : "post";
+
+        return api[method](requestUrl, formData);
+      })
       .then((response) => {
-        //falta o toast
-        console.log(response);
+        toast.success(response.data);
         navigate(`${baseRoute}/list`);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        if (err.name === "ValidationError") {
+          const errors = {};
+          err.inner.forEach((error) => {
+            errors[error.path] = error.message;
+          });
+          setValidationErrors(errors);
+        } else {
+          console.error(err);
+          toast.error(err.response.data.message);
+        }
       });
   };
 
-  // Esperar rota do back
   useEffect(() => {
     if (id) {
       api
-        .get(baseRoute)
+        .get(`${baseRoute}/${id}`)
         .then((response) => {
-          //falta o toast
-          console.log(response);
+          setFormData(response.data);
         })
         .catch((e) => {
           console.log(e);
         });
     }
-  }, [id])
+  }, [baseRoute, id, setFormData]);
+
+  const total = useMemo(() => {
+    return (
+      formData.items?.reduce((acc, item) => {
+        return acc + (item.quantidade || 0) * (item.valor_unitario || 0);
+      }, 0) || 0
+    ).toFixed(2);
+  }, [formData.items]);
+
+  useEffect(() => {
+    if (!hideTotalizador && total) {
+      updateFormData("valor_total", total);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [total]);
 
   return (
     //Envolve todo o componente
@@ -67,9 +97,10 @@ const BaseForm = ({
       <form
         onSubmit={handleSubmit}
         className={`flex flex-col gap-6 items-center`}
+        noValidate
       >
         <p className="underline">{title}</p>
-        <div className={`w-2/4 ${formClass}`}>
+        <div className={`w-96 ${formClass}`}>
           <BaseCard className="p-6">
             {fields.map((field) => (
               // Envolve cada campo
@@ -85,6 +116,7 @@ const BaseForm = ({
                   label={field.label}
                   placeholder={field.placeholder}
                   route={field.route}
+                  error={validationErrors[field.name]}
                 />
               </div>
             ))}
@@ -92,11 +124,11 @@ const BaseForm = ({
         </div>
 
         {showList && (
-          <div className="w-2/4">
+          <div className="w-96">
             <BaseCard className="p-6">
               {/* Aqui a lista */}
               <div>
-                <BaseSearchField />
+                <BaseSearchField baseRoute={baseRoute} />
               </div>
             </BaseCard>
           </div>
@@ -108,21 +140,24 @@ const BaseForm = ({
           <BaseButton
             isForm
             text={buttonText ?? "Salvar"}
-            onCLick={() => handleSubmit(e)}
+            type="submit"
+            action="incluir"
           />
-        ) : (!hideTotalizador && (
-          <BaseCard className="fixed bottom-0 left-60 right-0 flex justify-between items-center px-6 py-4 bg-white shadow z-50">
-            <div>Aqui vai ter o totalizador</div>
-            <div>
-              <BaseButton
-                isForm
-                text={buttonText ?? "Salvar"}
-                onCLick={() => handleSubmit(e)}
-              />
-            </div>
-          </BaseCard>
-        ))}
-
+        ) : (
+          !hideTotalizador && (
+            <BaseCard className="fixed bottom-0 left-60 right-0 flex justify-between items-center px-6 py-4 bg-white shadow z-50">
+              <div>Valor Total da Locação: R$ {total}</div>
+              <div>
+                <BaseButton
+                  isForm
+                  text={buttonText ?? "Salvar"}
+                  type="submit"
+                  action="incluir"
+                />
+              </div>
+            </BaseCard>
+          )
+        )}
       </form>
     </Section>
   );

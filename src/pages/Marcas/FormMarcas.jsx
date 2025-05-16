@@ -8,20 +8,25 @@ const FormMarcas = () => {
       type: "text",
       label: "Nome",
       required: true,
-      placeholder: "Nome da marca",
+      placeholder: "Nome",
     },
     {
       name: "codigo",
       type: "number",
       label: "Código",
       required: true,
-      placeholder: "Código da marca",
+      placeholder: "Código",
     },
   ];
 
   return (
     <FormProvider>
-      <BaseForm fields={fields} title={"Marca"} baseRoute="/marcas" hideTotalizador/>
+      <BaseForm
+        fields={fields}
+        title={"Marcas"}
+        baseRoute="/marcas"
+        hideTotalizador
+      />
     </FormProvider>
   );
 };

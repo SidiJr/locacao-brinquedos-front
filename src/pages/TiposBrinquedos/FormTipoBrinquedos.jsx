@@ -9,14 +9,14 @@ const FormTipoBrinquedos = () => {
             type: 'text',
             label: 'Nome',
             required: true,
-            placeholder: 'Tipo do brinquedo',
+            placeholder: 'Nome',
         },
         {
             name: 'codigo',
-            type: 'text',
+            type: 'number',
             label: 'Código',
             required: true,
-            placeholder: 'Código do tipo de brinquedo',
+            placeholder: 'Código',
         },
     ];
 

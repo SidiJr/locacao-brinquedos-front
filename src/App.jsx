@@ -24,6 +24,7 @@ import ListUsuarios from "./pages/Usuarios/ListUsuarios";
 import FormUsuarios from "./pages/Usuarios/FormUsuarios";
 import FormPagamentos from "./pages/Pagamentos/FormPagamentos";
 import ListPagamentos from "./pages/Pagamentos/ListPagamentos";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
       <Router>
         <AuthContent />
       </Router>
+      <ToastContainer />
     </AuthProvider>
   );
 }
@@ -47,7 +49,6 @@ const AuthContent = () => {
         {isAuthenticated && <NavBar />}
         <div>
           <Routes>
-
             <Route path="/" element={isAuthenticated ? <Home /> : <Login />} />
             <Route path="/about" element={<About />} />
 
@@ -88,15 +89,23 @@ const AuthContent = () => {
             <Route path="/permissoes/form/:id" element={<FormPermissoes />} />
 
             {/* TiposBrinquedos */}
-            <Route path="/tipo-brinquedos/list" element={<ListTipoBrinquedos />} />
-            <Route path="/tipo-brinquedos/form" element={<FormTipoBrinquedos />} />
-            <Route path="/tipo-brinquedos/form/:id" element={<FormTipoBrinquedos />} />
+            <Route
+              path="/tipo-brinquedos/list"
+              element={<ListTipoBrinquedos />}
+            />
+            <Route
+              path="/tipo-brinquedos/form"
+              element={<FormTipoBrinquedos />}
+            />
+            <Route
+              path="/tipo-brinquedos/form/:id"
+              element={<FormTipoBrinquedos />}
+            />
 
             {/* Usuarios */}
             <Route path="/usuarios/list" element={<ListUsuarios />} />
             <Route path="/usuarios/form" element={<FormUsuarios />} />
             <Route path="/usuarios/form/:id" element={<FormUsuarios />} />
-
           </Routes>
         </div>
       </div>

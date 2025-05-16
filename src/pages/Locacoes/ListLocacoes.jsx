@@ -2,7 +2,7 @@ import BaseList from "../../components/ListElements/BaseList";
 import { ListProvider } from "../../contexts/ListContext";
 
 const ListLocacoes = () => {
-  const fields = ["id", ""];
+  const fields = ["id", "codigo"];
 
   return (
     <ListProvider>

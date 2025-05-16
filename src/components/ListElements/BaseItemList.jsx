@@ -4,6 +4,7 @@ import BaseButton from "../FormElements/BaseButton";
 import { listItemCss } from "./helpers";
 import api from "../../api/axios";
 import { useList } from "../../contexts/ListContext";
+import { toast } from "react-toastify";
 
 const BaseItemList = ({ item, fields, baseRoute, id, canEdit = true }) => {
   const { listData, setListData } = useList();
@@ -14,10 +15,15 @@ const BaseItemList = ({ item, fields, baseRoute, id, canEdit = true }) => {
       .then((response) => {
         const newList = listData.filter((i) => i.id !== id);
         setListData(newList);
-        console.log(response);
+        toast.success(response.data.message ?? "Excluído com sucesso!");
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        console.error(error);
+        if (error.response?.data?.error) {
+          toast.error(error.response.data.error);
+        } else {
+          toast.error("Erro desconhecido ao deletar.");
+        }
       });
   };
 
@@ -32,8 +38,16 @@ const BaseItemList = ({ item, fields, baseRoute, id, canEdit = true }) => {
         ))}
       {canEdit &&
         <div className="flex gap-2">
-          <BaseButton text="Editar" route={`${baseRoute}/form/${id}`} />
-          <BaseButton text="Deletar" onClick={handleDelete} />
+          <BaseButton
+            route={`${baseRoute}/form/${id}`}
+            action="editar"
+            icon="fa-solid fa-pen"
+          />
+          <BaseButton
+            onClick={handleDelete}
+            action="deletar"
+            icon="fa-solid fa-trash"
+          />
         </div>
       }
     </div>
