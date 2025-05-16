@@ -1,6 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import api from '../../../api/axios';
 
-const ValueCard = ({value, className, title}) => {
+const ValueCard = ({startValue, baseRoute, className, title}) => {
+
+  const [value, setValue] = useState(startValue??"Carregando...");
+
+  useEffect(() => {
+    if(!baseRoute) return;
+    api
+      .get(baseRoute)
+      .then((response) => {
+        setValue(response.data.length);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
   return (
 
     <div className='w-full h-full border-gray-200 rounded-lg border-2'>

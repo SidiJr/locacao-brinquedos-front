@@ -5,7 +5,7 @@ import { listItemCss } from "./helpers";
 import api from "../../api/axios";
 import { useList } from "../../contexts/ListContext";
 
-const BaseItemList = ({ item, fields, baseRoute, id }) => {
+const BaseItemList = ({ item, fields, baseRoute, id, canEdit = true }) => {
   const { listData, setListData } = useList();
 
   const handleDelete = () => {
@@ -30,10 +30,12 @@ const BaseItemList = ({ item, fields, baseRoute, id }) => {
             {value}
           </div>
         ))}
-      <div className="flex gap-2">
-        <BaseButton text="Editar" route={`${baseRoute}/form/${id}`} />
-        <BaseButton text="Deletar" onClick={handleDelete} />
-      </div>
+      {canEdit &&
+        <div className="flex gap-2">
+          <BaseButton text="Editar" route={`${baseRoute}/form/${id}`} />
+          <BaseButton text="Deletar" onClick={handleDelete} />
+        </div>
+      }
     </div>
   );
 };

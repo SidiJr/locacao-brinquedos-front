@@ -6,7 +6,7 @@ import BaseItemList from "./BaseItemList";
 import api from "../../api/axios";
 import { useList } from "../../contexts/ListContext";
 
-const BaseList = ({ baseRoute, fields }) => {
+const BaseList = ({ baseRoute, fields, canEdit = true }) => {
   const { listData, setListData } = useList();
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const BaseList = ({ baseRoute, fields }) => {
 
   return (
     <Section className="m-10 !border-0 flex flex-col items-center gap-2">
-      <BaseButton text={"Incluir"} route={`${baseRoute}/form`} />
+      {canEdit && <BaseButton text={"Incluir"} route={`${baseRoute}/form`} />}
 
       <BaseCard className="gap-2 flex flex-col p-5">
         {listData.length > 0 ? (
@@ -33,6 +33,7 @@ const BaseList = ({ baseRoute, fields }) => {
               fields={fields}
               baseRoute={baseRoute}
               id={item.id}
+              canEdit={canEdit}
             />
           ))
         ) : (
